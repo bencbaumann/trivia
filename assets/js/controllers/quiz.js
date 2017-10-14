@@ -7,5 +7,8 @@ module.exports = {
     incorrect: 0,
     getQuestion: function(){
         return questions[this.position];
+    },
+    next: function(){
+        this.position++;
     }
 }

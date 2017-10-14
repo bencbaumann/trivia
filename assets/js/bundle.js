@@ -86,6 +86,9 @@ module.exports = {
     incorrect: 0,
     getQuestion: function(){
         return questions[this.position];
+    },
+    next: function(){
+        this.position++;
     }
 }
 
@@ -139,6 +142,11 @@ module.exports = {
             div.appendChild(label);
         });
         this.divQuestions.appendChild(div);
+        var a = document.createElement('a');
+        a.id="next";
+        a.innerHTML = "next";
+        a.href="3";
+        this.divQuestions.appendChild(a);
         console.log(question);
     }
 }
