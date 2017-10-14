@@ -9,12 +9,12 @@ input[type=radio] + label {
   display: block;
   height: 50px;
   width: 100%;
-  background: grey;
+  background: lightgrey;
   text-align: center;
 }
 input[type=radio] + label:hover {
-  background: blue;
+  background: lightblue;
 }
 input[type=radio]:checked + label {
-  background: lightblue;
+  background: lightgreen;
 }

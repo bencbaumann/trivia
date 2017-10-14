@@ -73,13 +73,47 @@ console.log(quiz);
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+const questions = __webpack_require__(2);
 module.exports = {
+    position: 0,
     questions: questions,
     correct: 0,
-    incorrect: 0
+    incorrect: 0,
+    getQuestion: function(){
+        return questions[position];
+    }
 }
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+module.exports = [
+    {
+        "id": "q1",
+        "question": "What's the best kind of Pizza?",
+        "choices": [
+            "pepporoni",
+            "pepper",
+            "onion"
+        ],
+        "answer": "pepporoni"
+    },
+    {
+        "id": "q2",
+        "question": "What's the best kind of car?",
+        "choices": [
+            "ford",
+            "hyundai",
+            "bmw"
+        ],
+        "answer": "bmw"
+    }
+]
 
 /***/ })
 /******/ ]);
