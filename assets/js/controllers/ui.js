@@ -23,5 +23,8 @@ module.exports = {
         a.href="#";
         this.divQuestions.appendChild(a);
         console.log(question);
+        this.nextA = a;
+    },
+    next: function(game){
     }
 }

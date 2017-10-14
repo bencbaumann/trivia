@@ -72,6 +72,8 @@ var ui = __webpack_require__(3);
 
 ui.displayQuestion(quiz.getQuestion());
 
+ui.nextA.addEventListener('click', alert("clicked it"));
+
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -148,6 +150,9 @@ module.exports = {
         a.href="#";
         this.divQuestions.appendChild(a);
         console.log(question);
+        this.nextA = a;
+    },
+    next: function(game){
     }
 }
 
