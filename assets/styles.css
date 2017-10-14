@@ -9,13 +9,14 @@ input[type=radio] + label {
   display: block;
   height: 50px;
   width: 100%;
-  background: hotpink;
+  background: grey;
   border: 3px solid red;
   text-align: center;
+  border: solid red 5px;
 }
 input[type=radio] + label:hover {
-  background: green;
+  background: blue;
 }
 input[type=radio]:checked + label {
-  background: teal;
+  background: lightblue;
 }

@@ -1,8 +1,15 @@
+@primary: grey;
+@accent: blue;
+@accent2: lightblue;
+
+.debug() {
+    border: solid red 5px;
+}
+
 form {
     width: 500px;
     margin: auto;
 }
-
 input[type=radio] {
     display: none;
 }
@@ -11,15 +18,16 @@ input[type=radio]+label {
     display: block;
     height: 50px;
     width: 100%;
-    background: hotpink;
+    background: @primary;
     border: 3px solid red;
     text-align: center;
+    .debug();
 }
 
 input[type=radio]+label:hover {
-    background: green;
+    background: @accent;
 }
 
 input[type=radio]:checked+label {
-    background: teal;
+    background: @accent2;
 }
