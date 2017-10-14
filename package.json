@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "clear && lessc ./assets/css/styles.less ./assets/styles.css && webpack --config webpack.config.js && git pull origin master && git add . && git commit -m 'push it up' && git push origin master"
+    "start": "clear && lessc ./assets/css/styles.less ./assets/styles.css && webpack --config webpack.config.js && git pull origin master && git add . && git commit -m 'push it up' && git push origin master",
+    "build": "clear && lessc ./assets/css/styles.less ./assets/styles.css && webpack --config webpack.config.js && echo 'build complete'",
+    "less": "lessc ./assets/css/styles.less ./assets/styles.css",
+    "webpack": "webpack --config webpack.config.js",
+    "git": "git pull origin master && git add . && git commit -m 'push it up' && git push origin master"
   },
   "repository": {
     "type": "git",

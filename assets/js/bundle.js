@@ -90,10 +90,14 @@ const questions = __webpack_require__(2);
 module.exports = {
     position: 0,
     questions: questions,
+    answers: [],
     correct: 0,
     incorrect: 0,
     getQuestion: function(){
         return questions[this.position];
+    },
+    getAnswer: function(answer){
+        this.answers.push(answer);
     },
     next: function(){
         this.position++;
@@ -166,7 +170,7 @@ module.exports = {
         a.href=`#${question.id}`;
         this.divQuestions.appendChild(a);
         console.log(question);
-        a.addEventListener("click", window.nextQuestion);
+        a.addEventListener("click", nextQuestion);
     },
     next: function(game){
     }
