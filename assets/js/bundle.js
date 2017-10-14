@@ -124,6 +124,16 @@ module.exports = [
             "bmw"
         ],
         "answer": "bmw"
+    },
+    {
+        "id": "q3",
+        "question": "What's the best kind of computer?",
+        "choices": [
+            "apple",
+            "microsoft",
+            "dell"
+        ],
+        "answer": "apple"
     }
 ]
 
