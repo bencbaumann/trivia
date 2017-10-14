@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "http-server",
     "deploy": "npm run build && npm run git && npm start",
-    "build": "npm rum less && npm run webpack && echo 'build complete'",
+    "build": "npm run less && npm run webpack",
     "less": "lessc ./assets/css/styles.less ./assets/styles.css",
     "webpack": "webpack --config webpack.config.js",
     "git": "git pull origin master && git add . && git commit -m 'push it up' && git push origin master"
