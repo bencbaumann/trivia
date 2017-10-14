@@ -11,6 +11,8 @@ input[type=radio] + label {
   width: 100%;
   background: grey;
   text-align: center;
+  border: solid red 5px;
+  background: yellow;
 }
 input[type=radio] + label:hover {
   background: blue;
