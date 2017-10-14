@@ -3,4 +3,8 @@ var ui = require('./controllers/ui');
 
 ui.displayQuestion(quiz.getQuestion());
 
-ui.nextA.addEventListener("click", quiz.position++, ui.displayQuestion(quiz.position), false);
+ui.nextA.addEventListener("click", quiz.position++, nextQuestion);
+
+function nextQuestion(){
+    ui.displayQuestion(++quiz.position);
+}
