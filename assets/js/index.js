@@ -7,5 +7,6 @@ document.getElementById('next').addEventListener("click", nextQuestion);
 
 function nextQuestion(){
     console.log("Successful event capture");
-    ui.displayQuestion(++quiz.position);
+    ++quiz.position
+    ui.displayQuestion(quiz.getQuestion());
 }
