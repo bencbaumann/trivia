@@ -72,7 +72,7 @@ var ui = __webpack_require__(3);
 
 ui.displayQuestion(quiz.getQuestion());
 
-document.getElementById('next').addEventListener("click", quiz.position++, nextQuestion);
+document.getElementById('next').addEventListener("click", nextQuestion);
 
 function nextQuestion(){
     console.log("Successful event capture");
