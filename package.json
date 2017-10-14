@@ -10,7 +10,7 @@
     "build": "npm run less && npm run webpack",
     "less": "lessc ./assets/css/styles.less ./assets/styles.css",
     "webpack": "webpack --config webpack.config.js",
-    "git": "git pull origin master && git add . && git commit -m '$MSG' && git push origin master"
+    "git": "git pull origin master && git add . && git commit -m --MSG && git push origin master"
   },
   "repository": {
     "type": "git",
