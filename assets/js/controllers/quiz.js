@@ -6,6 +6,6 @@ module.exports = {
     correct: 0,
     incorrect: 0,
     getQuestion: function(){
-        return questions[position];
+        return questions[this.position];
     }
 }
