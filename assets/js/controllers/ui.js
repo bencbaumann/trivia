@@ -20,7 +20,7 @@ module.exports = {
         var a = document.createElement('a');
         a.id="next";
         a.innerHTML = "next";
-        a.href="#";
+        a.href=`#${question.id}`;
         this.divQuestions.appendChild(a);
         console.log(question);
         this.nextA = a;
