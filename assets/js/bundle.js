@@ -72,7 +72,7 @@ var ui = __webpack_require__(3);
 
 ui.displayQuestion(quiz.getQuestion());
 
-ui.nextA.addEventListener('onclick', alert("clicked it"));
+ui.nextA.addEventListener("click", quiz.position++, ui.displayQuestion(quiz.position), false);
 
 /***/ }),
 /* 1 */

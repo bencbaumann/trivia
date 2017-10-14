@@ -3,4 +3,4 @@ var ui = require('./controllers/ui');
 
 ui.displayQuestion(quiz.getQuestion());
 
-ui.nextA.addEventListener('onclick', alert("clicked it"));
+ui.nextA.addEventListener("click", quiz.position++, ui.displayQuestion(quiz.position), false);
