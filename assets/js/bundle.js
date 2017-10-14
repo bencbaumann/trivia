@@ -127,7 +127,7 @@ module.exports = {
         var h2 = document.createElement('h2');
         h2.innerHTML = question.question;
         div.appendChild(h2);
-        divQuestions.appendChild(div);
+        this.divQuestions.appendChild(div);
         question.choices.forEach(function(element) {
             
         });
