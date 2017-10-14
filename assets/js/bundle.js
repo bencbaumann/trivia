@@ -68,8 +68,9 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 var quiz = __webpack_require__(1);
+var ui = __webpack_require__(3);
 
-console.log(quiz.getQuestion());
+console.log(ui.displayQuestion(quiz.getQuestion()));
 
 /***/ }),
 /* 1 */
@@ -114,6 +115,18 @@ module.exports = [
         "answer": "bmw"
     }
 ]
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = {
+    divQuestions : document.getElementById('questions'),
+    displayQuestion(question){
+        var div = document.createElement('div');
+        console.log(question);
+    }
+}
 
 /***/ })
 /******/ ]);

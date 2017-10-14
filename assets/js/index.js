@@ -1,3 +1,4 @@
 var quiz = require('./controllers/quiz');
+var ui = require('./controllers/ui');
 
-console.log(quiz.getQuestion());
+console.log(ui.displayQuestion(quiz.getQuestion()));
