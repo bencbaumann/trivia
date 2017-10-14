@@ -23,7 +23,7 @@ module.exports = {
         a.href=`#${question.id}`;
         this.divQuestions.appendChild(a);
         console.log(question);
-        a.addEventListener("click", nextQuestion);
+        a.addEventListener("click", window.nextQuestion);
     },
     next: function(game){
     }

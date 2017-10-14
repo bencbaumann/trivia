@@ -72,7 +72,7 @@ var ui = __webpack_require__(3);
 
 ui.displayQuestion(quiz.getQuestion());
 
-document.getElementById('next').addEventListener("click", nextQuestion);
+// document.getElementById('next').addEventListener("click", nextQuestion);
 
 function nextQuestion(){
     console.log("Successful event capture");
@@ -166,7 +166,7 @@ module.exports = {
         a.href=`#${question.id}`;
         this.divQuestions.appendChild(a);
         console.log(question);
-        a.addEventListener("click", nextQuestion);
+        a.addEventListener("click", window.nextQuestion);
     },
     next: function(game){
     }
