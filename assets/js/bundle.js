@@ -70,7 +70,7 @@
 var quiz = __webpack_require__(1);
 var ui = __webpack_require__(3);
 
-console.log(ui.displayQuestion(quiz.getQuestion()));
+ui.displayQuestion(quiz.getQuestion());
 
 /***/ }),
 /* 1 */
