@@ -69,7 +69,7 @@
 
 var quiz = __webpack_require__(1);
 
-console.log(quiz);
+console.log(quiz.getQuestion());
 
 /***/ }),
 /* 1 */
