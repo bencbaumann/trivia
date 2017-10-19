@@ -69,35 +69,12 @@
 
 "use strict";
 
-const questions = __webpack_require__(3);
-module.exports = {
-    time: 30,
-    position: 0,
-    questions: questions,
-    answers: [],
-    correct: 0,
-    incorrect: 0,
-    countDown: ()=>{
-        setInterval(time--, 1000);
-    },
-    getQuestion: ()=>{
-        return questions[this.position];
-    },
-    getAnswer: (answer)=>{
-        this.answers.push(answer);
-    },
-    next: ()=>{
-        this.position++;
-    },
-    previous: ()=>{
-        this.position--;
-    },
-    startCountDown: ()=>{
-        this.countDown();
-    },
-    init: ()=>{
-        this.position = 0;
+module.exports = function (nodelist){
+    let arr = [];
+    for (var index = 0; index < nodelist.length; index++) {
+        arr.push(nodelist[index]);
     }
+    return arr;
 }
 
 /***/ }),
@@ -105,74 +82,26 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 var Observable = __webpack_require__(2);
-var quiz = __webpack_require__(0);
-var ui = __webpack_require__(4);
+var quiz = __webpack_require__(3);
+var ui = __webpack_require__(5);
+const nodelist2array = __webpack_require__(0);
 
 // instantiate new Observer class
-const quizInitObserver = new Observable();
-const quizNextObserver = new Observable();
 const updateDebugObserver = new Observable();
-const uiNextObserver = new Observable();
+const uiLabelObserver = new Observable();
 // subscribe to some observers
-quizInitObserver.subscribe(quiz.init);
-quizNextObserver.subscribe(ui.displayQuestion);
-uiNextObserver.subscribe(ui.showAnswer);
+uiLabelObserver.subscribe(ui.showAnswer);
 
-// ui.anchorNext.addEventListener('click', (ev)=>{
-//     uiNextObserver.notify();    
-// });
-ui.anchorTest.addEventListener('click', (ev)=>{
-    quizNextObserver.notify(quiz.getQuestion(quiz.position));    
-});
-
-document.body.addEventListener('click', function(event) {
-    if (event.target.id.toLowerCase() === 'next') {
-        uiNextObserver.notify();    
+document.body.addEventListener('click', (ev)=>{
+    if(ev.target.tagName === "LABEL"){
+        let answer = ev.target.innerHTML;
+        quiz.answers.push(answer);
+        uiLabelObserver.notify(quiz);
     }
   });
 
 quiz.init();
-quizNextObserver.notify(quiz.getQuestion(quiz.position));    
-
-// quiz.next();
-
-
-
-// appObserver.subscribe(quiz.next);
-// appObserver.subscribe(ui.divDebug);
-
-// notify all observers about new data on event
-// input.addEventListener('keyup', e => {
-//     headingsObserver.notify(e.target.value);
-//   });
-// console.log(appObserver);
-// ui.divDebug.innerHTML ="test1";
-// quizInitObserver.notify(quiz);
-
-// const uiObserver = new Observable();
-// uiObserver.subscribe(quiz.init);
-// uiObserver.notify();
-
-
-
-
-// uiObserver.subscribe(quiz.next);
-// uiObserver.notify(quiz);
-
-// quiz.start();
-// ui.displayQuestion(quiz.getQuestion());
-
-
-
-
-
-
-
-
-// ui.next(appObserver.notify(ui.displayQuestion(quiz.getQuestion(quiz.position))));
-// ui.next(appObserver.notify(quiz.next));
-
-
+ui.displayQuestion(quiz);    
 
 
 /***/ }),
@@ -209,6 +138,45 @@ module.exports = class Observable {
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+const questions = __webpack_require__(4);
+const quiz = {
+    time: 30,
+    position: 0,
+    questions: questions,
+    answers: [],
+    correct: 0,
+    incorrect: 0,
+    countDown: ()=>{
+        setInterval(time--, 1000);
+    },
+    getQuestion: ()=>{
+        return questions[this.position];
+    },
+    getAnswer: ()=>{
+        return quiz.questions[quiz.position].answer.answer;
+    },
+    next: ()=>{
+        this.position++;
+    },
+    previous: ()=>{
+        this.position--;
+    },
+    startCountDown: ()=>{
+        this.countDown();
+    },
+    init: ()=>{
+        this.position = 0;
+    }
+}
+
+module.exports = quiz;
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports) {
 
 module.exports = [
@@ -216,7 +184,7 @@ module.exports = [
         "id": "q1",
         "question": "What's the best kind of Pizza?",
         "choices": [
-            "pepporoni",
+            "pepperoni",
             "pepper",
             "onion"
         ],
@@ -267,25 +235,19 @@ module.exports = [
 ]
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var nodelist2array = __webpack_require__(5);
-var quiz = __webpack_require__(0);
+var nodelist2array = __webpack_require__(0);
+// var quiz = require('./quiz');
 var ui = {
     divQuestions : document.getElementById('questions'),
     divDebug : document.getElementById('debug'),
-    anchorNext: document.getElementById('next'),
-    anchorTest : document.getElementById('test'),
-    displayQuestion(question){
+    displayQuestion(quiz){
+        var question = quiz.getQuestion();
         ui.divQuestions.innerHTML = "";
-        var a = document.createElement('a');
-        a.id="next";
-        a.href="#";
-        a.innerHTML="Next";
-        ui.divQuestions.appendChild(a);
         var div = document.createElement('div');
         var h2 = document.createElement('h2');
         h2.innerHTML = question.question;
@@ -306,26 +268,31 @@ var ui = {
         console.log(div);
         ui.divQuestions.insertBefore(div, ui.anchorNext);
     },
-    nextQuestion: function(){
+    nextQuestion: function(quiz){
         quiz.position++;
         ui.displayQuestion(quiz.getQuestion());
     },
-    next: function(){
-        // quiz.position++;
-        ui.displayQuestion(quiz.getQuestion());
-    },
-    showAnswer: function(){
+    showAnswer: function(quiz){
+        var h2 = document.createElement('h3');;
+        if(quiz.answers[quiz.position] === quiz.getAnswer()){
+            h2.innerHTML = `Correct: ${quiz.getAnswer()}`;
+        }
+        else {
+            h2.innerHTML = `Incorrect: ${quiz.getAnswer()}`;
+        }
         var els = document.getElementsByTagName('input');
         var elsArray = nodelist2array(els);
         console.log(elsArray);
         ui.divQuestions.innerHTML = "";
-        var h2 = document.createElement('h2');
-        h2.innerHTML = quiz.getQuestion().answer.answer;
         ui.divQuestions.appendChild(h2);
         var img = document.createElement('img');
         img.src = quiz.getQuestion().answer.img;
         ui.divQuestions.appendChild(img);
-        setTimeout(ui.nextQuestion, 3000);
+        quiz.next();
+        console.log(quiz);
+        setTimeout(()=>{
+            ui.nextQuestion(quiz);
+        }, 3000);
         
     },
     next: function(game){
@@ -338,20 +305,6 @@ var ui = {
 
 
 module.exports = ui;
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-module.exports = function (nodelist){
-    let arr = [];
-    for (var index = 0; index < nodelist.length; index++) {
-        arr.push(nodelist[index]);
-    }
-    return arr;
-}
 
 /***/ })
 /******/ ]);

@@ -1,6 +1,6 @@
 'use strict'
 const questions = require('../models/questions');
-module.exports = {
+const quiz = {
     time: 30,
     position: 0,
     questions: questions,
@@ -13,8 +13,8 @@ module.exports = {
     getQuestion: ()=>{
         return questions[this.position];
     },
-    getAnswer: (answer)=>{
-        this.answers.push(answer);
+    getAnswer: ()=>{
+        return quiz.questions[quiz.position].answer.answer;
     },
     next: ()=>{
         this.position++;
@@ -29,3 +29,5 @@ module.exports = {
         this.position = 0;
     }
 }
+
+module.exports = quiz;

@@ -1,18 +1,12 @@
 'use strict'
 var nodelist2array = require('../lib/nodelist2array');
-var quiz = require('./quiz');
+// var quiz = require('./quiz');
 var ui = {
     divQuestions : document.getElementById('questions'),
     divDebug : document.getElementById('debug'),
-    anchorNext: document.getElementById('next'),
-    anchorTest : document.getElementById('test'),
-    displayQuestion(question){
+    displayQuestion(quiz){
+        var question = quiz.getQuestion();
         ui.divQuestions.innerHTML = "";
-        var a = document.createElement('a');
-        a.id="next";
-        a.href="#";
-        a.innerHTML="Next";
-        ui.divQuestions.appendChild(a);
         var div = document.createElement('div');
         var h2 = document.createElement('h2');
         h2.innerHTML = question.question;
@@ -33,26 +27,31 @@ var ui = {
         console.log(div);
         ui.divQuestions.insertBefore(div, ui.anchorNext);
     },
-    nextQuestion: function(){
+    nextQuestion: function(quiz){
         quiz.position++;
         ui.displayQuestion(quiz.getQuestion());
     },
-    next: function(){
-        // quiz.position++;
-        ui.displayQuestion(quiz.getQuestion());
-    },
-    showAnswer: function(){
+    showAnswer: function(quiz){
+        var h2 = document.createElement('h3');;
+        if(quiz.answers[quiz.position] === quiz.getAnswer()){
+            h2.innerHTML = `Correct: ${quiz.getAnswer()}`;
+        }
+        else {
+            h2.innerHTML = `Incorrect: ${quiz.getAnswer()}`;
+        }
         var els = document.getElementsByTagName('input');
         var elsArray = nodelist2array(els);
         console.log(elsArray);
         ui.divQuestions.innerHTML = "";
-        var h2 = document.createElement('h2');
-        h2.innerHTML = quiz.getQuestion().answer.answer;
         ui.divQuestions.appendChild(h2);
         var img = document.createElement('img');
         img.src = quiz.getQuestion().answer.img;
         ui.divQuestions.appendChild(img);
-        setTimeout(ui.nextQuestion, 3000);
+        quiz.next();
+        console.log(quiz);
+        setTimeout(()=>{
+            ui.nextQuestion(quiz);
+        }, 3000);
         
     },
     next: function(game){

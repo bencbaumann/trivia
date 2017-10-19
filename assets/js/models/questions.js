@@ -3,7 +3,7 @@ module.exports = [
         "id": "q1",
         "question": "What's the best kind of Pizza?",
         "choices": [
-            "pepporoni",
+            "pepperoni",
             "pepper",
             "onion"
         ],
